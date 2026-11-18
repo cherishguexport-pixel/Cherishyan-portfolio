@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="北京车展客户线索自动化工作流交互演示" />
+    <title>北京车展客户线索工作流</title>
+    <style>
+:root{--ink:#172033;--muted:#687386;--line:#dfe4ea;--paper:#f5f7f9;--white:#fff;--blue:#1155cc;--blue-soft:#edf4ff;--cyan:#1aa6a6;--amber:#d97706;--red:#c93c3c;--shadow:0 12px 35px rgba(23,32,51,.08)}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Segoe UI","Microsoft YaHei",sans-serif;line-height:1.6}.topbar{display:flex;justify-content:space-between;gap:24px;align-items:end;padding:34px clamp(22px,5vw,76px);background:#101b31;color:#fff}.topbar h1{margin:2px 0 0;font-size:clamp(26px,4vw,44px);letter-spacing:-.03em}.eyebrow{margin:0;color:#65c9cf;font-size:12px;font-weight:700;letter-spacing:.16em}.button{border:0;border-radius:8px;padding:10px 16px;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:#fff}.secondary{background:#e8edf3;color:var(--ink)}.ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.3)}main{max-width:1320px;margin:auto;padding:0 clamp(18px,4vw,54px) 60px}.project-strip{display:grid;grid-template-columns:repeat(6,1fr);margin-top:-1px;background:var(--white);border:1px solid var(--line);box-shadow:var(--shadow)}.project-strip div{padding:22px 16px;border-right:1px solid var(--line);text-align:center}.project-strip div:last-child{border:0}.project-strip strong{display:block;font-size:24px}.project-strip span{color:var(--muted);font-size:13px}.notice{display:flex;gap:16px;margin:24px 0;padding:15px 18px;background:#fff8e8;border-left:4px solid var(--amber);border-radius:6px}.notice p{margin:0;color:#6f5a2d}.tabs{display:flex;gap:8px;margin:28px 0 0;border-bottom:1px solid var(--line)}.tab{border:0;background:transparent;padding:14px 18px;color:var(--muted);font-weight:700;cursor:pointer;border-bottom:3px solid transparent}.tab.active{color:var(--blue);border-color:var(--blue)}.view{display:none;padding-top:34px}.active-view{display:block}.section-heading{display:flex;justify-content:space-between;gap:34px;align-items:end;margin-bottom:24px}.section-heading h2{margin:2px 0 0;font-size:30px}.section-heading>p{max-width:590px;margin:0;color:var(--muted)}.flow{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;margin-bottom:24px}.flow-step{position:relative;min-height:105px;padding:15px 12px;background:#fff;border:1px solid var(--line);border-radius:10px}.flow-step::after{content:"→";position:absolute;right:-10px;top:38%;z-index:2;color:var(--blue);font-weight:800}.flow-step:last-child::after{display:none}.flow-step b{display:block;font-size:14px}.flow-step span{font-size:12px;color:var(--muted)}.role-market{border-top:4px solid var(--blue)}.role-sales{border-top:4px solid var(--amber)}.role-system{border-top:4px solid var(--cyan)}.two-column{display:grid;grid-template-columns:1fr 1fr;gap:22px}.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:24px;box-shadow:var(--shadow)}.panel h3{margin:4px 0 16px}.panel-kicker{margin:0;color:var(--blue);font-size:12px;font-weight:800;letter-spacing:.12em}.timeline{margin:0;padding:0;list-style:none}.timeline li{display:grid;grid-template-columns:135px 1fr;padding:14px 0;border-bottom:1px solid var(--line)}.timeline li:last-child{border:0}.timeline span{color:var(--muted)}.challenge{background:#14213b;color:#fff}.challenge p:not(.panel-kicker){color:#ccd4e2}.tags{display:flex;flex-wrap:wrap;gap:8px}.tags span{padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.1);font-size:12px}.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;background:#fff;border:1px solid var(--line);padding:24px;border-radius:12px}.form-grid label,.dialog-card label,.toolbar label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700}.wide{grid-column:1/-1}input,select,textarea{width:100%;border:1px solid #cfd6df;border-radius:7px;padding:10px 11px;background:#fff;color:var(--ink);font:inherit}textarea{resize:vertical}.checks{display:flex;gap:24px}.checks label{display:flex;flex-direction:row;align-items:center}.checks input{width:auto}.form-actions{display:flex;gap:10px}.ai-result{margin-top:20px;padding:22px;background:var(--blue-soft);border:1px solid #bcd3fa;border-radius:12px}.ai-result h3{margin-top:0}.ai-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.toolbar{display:flex;justify-content:flex-end;gap:14px;margin-bottom:12px}.toolbar label{min-width:190px}.alert-list{display:grid;gap:8px;margin-bottom:14px}.alert{display:flex;gap:10px;padding:10px 12px;border-radius:7px;background:#fff3f3;border:1px solid #f0c6c6;font-size:13px}.alert b{color:var(--red)}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px;background:#fff}table{width:100%;border-collapse:collapse;min-width:920px}th,td{padding:14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{background:#edf1f5;font-size:12px;letter-spacing:.05em}tbody tr{cursor:pointer}tbody tr:hover{background:#f7faff}.subtle{display:block;color:var(--muted);font-size:12px}.badge{display:inline-block;padding:4px 9px;border-radius:999px;background:#edf1f5;font-size:12px;font-weight:700}.badge.high{background:#ffe8e2;color:#9c301f}.badge.follow{background:#fff2d8;color:#8a5a00}.badge.normal{background:#edf1f5;color:#596272}dialog{border:0;border-radius:14px;padding:0;width:min(650px,92vw);box-shadow:0 22px 80px rgba(0,0,0,.25)}dialog::backdrop{background:rgba(16,27,49,.65)}.dialog-card{padding:24px;display:grid;gap:14px}.dialog-head{display:flex;justify-content:space-between;align-items:start}.dialog-head h3{margin:3px 0}.icon-button{border:0;background:transparent;font-size:28px;cursor:pointer}.summary-box{background:var(--blue-soft);padding:15px;border-radius:8px;font-size:14px}.dialog-actions{display:flex;justify-content:flex-end;gap:8px}.metric-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.metric-card{background:#fff;border:1px solid var(--line);padding:18px;border-radius:10px}.metric-card strong{display:block;font-size:28px}.metric-card span{color:var(--muted);font-size:12px}.dashboard-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.insight-panel{grid-column:1/-1}.funnel{display:grid;gap:9px}.funnel-row{display:grid;grid-template-columns:75px 1fr 38px;gap:10px;align-items:center;font-size:13px}.funnel-bar{height:24px;border-radius:5px;background:linear-gradient(90deg,var(--blue),#55a3ff)}.bar-chart{display:grid;gap:14px}.bar-row{display:grid;grid-template-columns:90px 1fr 28px;gap:10px;align-items:center;font-size:13px}.bar-track{height:10px;background:#edf1f5;border-radius:99px;overflow:hidden}.bar-fill{height:100%;background:var(--cyan);border-radius:99px}footer{display:flex;justify-content:space-between;padding:22px clamp(22px,5vw,76px);background:#101b31;color:#b8c2d2;font-size:12px}@media(max-width:900px){.project-strip{grid-template-columns:repeat(3,1fr)}.flow{grid-template-columns:repeat(3,1fr)}.flow-step::after{display:none}.two-column,.dashboard-grid{grid-template-columns:1fr}.insight-panel{grid-column:auto}.metric-cards{grid-template-columns:repeat(2,1fr)}.section-heading{display:block}.section-heading>p{margin-top:10px}}@media(max-width:600px){.topbar{align-items:start;flex-direction:column}.project-strip{grid-template-columns:repeat(2,1fr)}.flow{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.wide{grid-column:auto}.ai-grid{grid-template-columns:1fr}.checks{flex-direction:column;gap:8px}.metric-cards{grid-template-columns:1fr 1fr}.tabs{overflow:auto}.tab{white-space:nowrap}.notice{display:block}.toolbar{display:grid}.two-column{display:block}.panel{margin-bottom:14px}footer{display:block}}
+
+
+/* ===== theme.css ===== */
+:root {
+  --theme-page: #f1f0f6;
+  --theme-surface: #ffffff;
+  --theme-ink: #23262f;
+  --theme-muted: #77798a;
+  --theme-line: #deddea;
+  --theme-violet: #8b7cf6;
+  --theme-pink: #ef9dc5;
+  --theme-blue: #85cfe3;
+  --theme-violet-soft: #f2efff;
+  --theme-pink-soft: #fff1f7;
+  --theme-blue-soft: #eef9fc;
+  --theme-shadow: 0 24px 65px rgba(70, 60, 140, .10);
+}
+
+body { background: var(--theme-page); color: var(--theme-ink); }
+
+.topbar {
+  position: relative;
+  overflow: hidden;
+  color: var(--theme-ink);
+  background:
+    radial-gradient(circle at 72% 10%, rgba(139, 124, 246, .19), transparent 32%),
+    radial-gradient(circle at 18% 90%, rgba(239, 157, 197, .25), transparent 34%),
+    linear-gradient(120deg, #f8f7fb, #f1f0f6 58%, #eef8fb);
+  border-bottom: 1px solid rgba(139, 124, 246, .12);
+}
+.topbar::after {
+  content: "WORKFLOW";
+  position: absolute;
+  right: 3%;
+  bottom: -.34em;
+  color: transparent;
+  font-size: clamp(72px, 11vw, 150px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -.06em;
+  -webkit-text-stroke: 1px rgba(139, 124, 246, .13);
+  pointer-events: none;
+}
+.topbar > * { position: relative; z-index: 1; }
+.eyebrow, .panel-kicker { color: #8074d9; }
+
+.button { transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
+.button:hover { transform: translateY(-1px); box-shadow: 0 9px 24px rgba(78, 68, 145, .13); }
+.primary { color: #fff; background: linear-gradient(90deg, #8273ee, #ca83d3); }
+.form-actions .primary {
+  color: #514d62;
+  background: linear-gradient(90deg, #d7d0ee, #ecd6e1);
+  border-color: #cfc7df;
+  box-shadow: 0 8px 20px rgba(114, 101, 148, 0.10);
+}
+.form-actions .primary:hover {
+  background: linear-gradient(90deg, #cec5e7, #e7cbd9);
+  border-color: #c3b8d8;
+}
+.secondary { color: #55586a; background: #f0eef7; }
+.ghost { color: #5f6172; background: rgba(255,255,255,.72); border: 1px solid rgba(112,103,174,.22); }
+
+main { position: relative; }
+.project-strip, .panel, .form-grid, .table-wrap, .metric-card {
+  border-color: var(--theme-line);
+  background: rgba(255,255,255,.88);
+  box-shadow: var(--theme-shadow);
+}
+.project-strip { overflow: hidden; border-radius: 0 0 20px 20px; }
+.project-strip div { border-color: var(--theme-line); }
+.project-strip strong { color: #7569d8; }
+.project-strip span, .section-heading > p, .timeline span, .subtle, .metric-card span { color: var(--theme-muted); }
+
+.notice { color: #68536a; background: #fff4f8; border-left-color: var(--theme-pink); }
+.notice p { color: #745f72; }
+.tabs { border-color: var(--theme-line); }
+.tab { color: #858698; }
+.tab.active { color: #7567d9; border-color: var(--theme-violet); }
+
+.flow-step {
+  border-color: var(--theme-line);
+  background: rgba(255,255,255,.9);
+  box-shadow: 0 10px 30px rgba(70,60,140,.06);
+}
+.flow-step::after { color: #9385e8; }
+.role-market { border-top-color: var(--theme-violet); background: linear-gradient(180deg, var(--theme-violet-soft), #fff 48%); }
+.role-sales { border-top-color: var(--theme-pink); background: linear-gradient(180deg, var(--theme-pink-soft), #fff 48%); }
+.role-system { border-top-color: var(--theme-blue); background: linear-gradient(180deg, var(--theme-blue-soft), #fff 48%); }
+
+.panel, .form-grid, .ai-result, .table-wrap, .metric-card, .summary-box { border-radius: 16px; }
+.challenge { color: var(--theme-ink); background: linear-gradient(135deg, #f3efff, #fff3f8); border-color: #ded5f4; }
+.challenge p:not(.panel-kicker) { color: #6f6f82; }
+.tags span { color: #676779; background: rgba(255,255,255,.72); border: 1px solid rgba(139,124,246,.13); }
+
+input, select, textarea { border-color: #d8d5e5; background: #fdfcff; }
+input:focus, select:focus, textarea:focus { outline: 3px solid rgba(139,124,246,.14); border-color: #9d91e7; }
+.ai-result { background: #f4f2f6; border-color: #ded9e4; }
+.ai-result h3, .ai-result strong { color: #676273; }
+
+.alert { color: #735866; background: #fff2f6; border-color: #f2d1de; }
+.alert b { color: #b64e77; }
+th { color: #626476; background: #f3f1f8; }
+th, td { border-color: var(--theme-line); }
+tbody tr:hover { background: #faf8ff; }
+.badge { color: #656778; background: #f0eef5; }
+.badge.high { color: #9d4264; background: #ffeaf2; }
+.badge.follow { color: #846539; background: #fff4df; }
+.badge.normal { color: #5d6d79; background: #edf7fa; }
+
+dialog { border-radius: 20px; box-shadow: 0 28px 90px rgba(48,40,92,.25); }
+dialog::backdrop { background: rgba(41,39,62,.42); backdrop-filter: blur(4px); }
+.summary-box { background: #f4f2f6; }
+
+.metric-card strong { color: #776adb; }
+.funnel-bar { background: #ab9bc8; }
+.bar-track { background: #eeecf4; }
+.bar-fill { background: #8fb7b0; }
+
+footer {
+  color: #737486;
+  background: linear-gradient(120deg, #f4f1ff, #fff2f7 52%, #eef9fc);
+  border-top: 1px solid var(--theme-line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button { transition: none; }
+}
+
+</style>
+    
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">PORTFOLIO · WORKFLOW PROTOTYPE</p>
+        <h1>北京车展客户线索工作流</h1>
+      </div>
+      <button id="resetDemo" class="button ghost" type="button">恢复示例数据</button>
+    </header>
+
+    <main>
+      <section class="project-strip" aria-label="项目规模">
+        <div><strong>40天</strong><span>筹备周期</span></div>
+        <div><strong>120㎡</strong><span>展台面积</span></div>
+        <div><strong>50万+</strong><span>综合投入</span></div>
+        <div><strong>25人</strong><span>参展人员</span></div>
+        <div><strong>4条</strong><span>产品线</span></div>
+        <div><strong>25+</strong><span>日均客户接待</span></div>
+      </section>
+
+      <section class="notice">
+        <strong>演示说明</strong>
+        <p>展会策划与执行为真实项目经历；客户标签、销售移交、跟进阶段和转化漏斗为基于项目复盘设计的流程原型。所有客户数据均为虚构演示数据。</p>
+      </section>
+
+      <nav class="tabs" aria-label="工作流模块">
+        <button class="tab active" data-view="overview">流程总览</button>
+        <button class="tab" data-view="intake">客户登记</button>
+        <button class="tab" data-view="leads">线索工作台</button>
+        <button class="tab" data-view="dashboard">转化看板</button>
+      </nav>
+
+      <section id="overview" class="view active-view">
+        <div class="section-heading">
+          <div><p class="eyebrow">MARKET → SALES → INSIGHT</p><h2>端到端协同流程</h2></div>
+          <p>市场负责登记、分类和移交；销售负责需求确认、样件方案、报价商务及结果反馈；系统负责提醒和统计。</p>
+        </div>
+        <div class="flow" id="flowSteps"></div>
+        <div class="two-column">
+          <article class="panel">
+            <p class="panel-kicker">真实项目</p>
+            <h3>40天车展全流程推进</h3>
+            <ol class="timeline">
+              <li><b>供应商与方案</b><span>新供应商开发、三家竞比、展台方案与报价沟通</span></li>
+              <li><b>展品与人员</b><span>4条产品线样件收集打包、25人住宿及后勤安排</span></li>
+              <li><b>现场与收尾</b><span>主机厂客户接待、现场协调、撤展及样件回收</span></li>
+            </ol>
+          </article>
+          <article class="panel challenge">
+            <p class="panel-kicker">关键问题</p>
+            <h3>临时新增展品超出地台承重</h3>
+            <p>在保证展示效果、施工安全、预算和工期的前提下，重新协调结构方案与摆放细节，确认新增费用，协商付款方式并推进紧急合同签署，最终按期落地。</p>
+            <div class="tags"><span>风险识别</span><span>方案协调</span><span>预算控制</span><span>合同推进</span></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="intake" class="view">
+        <div class="section-heading">
+          <div><p class="eyebrow">STEP 01</p><h2>客户登记与AI预分类</h2></div>
+          <p>填写后系统会模拟AI提取客户特征、生成需求摘要与下一步建议，并按规则匹配销售。</p>
+        </div>
+        <form id="leadForm" class="form-grid">
+          <label>客户姓名<input name="name" required placeholder="例如：张女士" /></label>
+          <label>公司名称<input name="company" required placeholder="例如：某汽车集团" /></label>
+          <label>职位或部门<input name="department" placeholder="例如：内饰设计部" /></label>
+          <label>联系方式<input name="contact" required placeholder="手机或邮箱" /></label>
+          <label>客户类型<select name="companyType" required><option>主机厂</option><option>一级供应商</option><option>二级供应商</option><option>设计机构</option><option>合作伙伴</option><option>其他</option></select></label>
+          <label>所属区域<select name="region"><option>华东</option><option>华南</option><option>华北</option><option>西部</option></select></label>
+          <label>关注产品线<select name="productLine"><option>内饰纹理</option><option>外饰纹理</option><option>模具工艺</option><option>数字化服务</option></select></label>
+          <label>应用部位<input name="application" placeholder="例如：仪表板、门板" /></label>
+          <label>项目阶段<select name="projectStage"><option>概念调研</option><option>前期设计</option><option>开发验证</option><option>量产准备</option><option>暂无明确项目</option></select></label>
+          <label>既有负责人<input name="existingOwner" placeholder="可留空，由规则分配" /></label>
+          <label class="wide">需求描述<textarea name="notes" rows="4" placeholder="描述关注风格、项目时间、车型或其他需求"></textarea></label>
+          <div class="wide checks">
+            <label><input type="checkbox" name="needsSample" /> 需要样件或方案</label>
+            <label><input type="checkbox" name="needsTechnicalSupport" /> 需要技术沟通</label>
+          </div>
+          <div class="wide form-actions"><button class="button primary" type="submit">生成AI分类并创建线索</button><button class="button secondary" id="fillExample" type="button">填入示例</button></div>
+        </form>
+        <div id="aiResult" class="ai-result" hidden></div>
+      </section>
+
+      <section id="leads" class="view">
+        <div class="section-heading">
+          <div><p class="eyebrow">STEP 02–09</p><h2>市场与销售协同工作台</h2></div>
+          <p>点击线索可查看AI摘要、更新销售阶段和下一步行动。市场只跟踪移交结果，商务字段由销售维护。</p>
+        </div>
+        <div id="alertList" class="alert-list"></div>
+        <div class="toolbar">
+          <label>筛选阶段<select id="statusFilter"><option value="">全部阶段</option></select></label>
+          <label>搜索<input id="searchInput" placeholder="客户、公司或产品线" /></label>
+        </div>
+        <div class="table-wrap"><table><thead><tr><th>线索</th><th>客户与需求</th><th>AI等级</th><th>负责人</th><th>当前阶段</th><th>下一步</th></tr></thead><tbody id="leadRows"></tbody></table></div>
+        <dialog id="leadDialog">
+          <form method="dialog" class="dialog-card" id="leadUpdateForm">
+            <div class="dialog-head"><div><p class="eyebrow">LEAD DETAIL</p><h3 id="dialogTitle"></h3></div><button class="icon-button" value="cancel" aria-label="关闭">×</button></div>
+            <div id="dialogSummary" class="summary-box"></div>
+            <input type="hidden" name="id" />
+            <label>当前阶段<select name="status" id="dialogStatus"></select></label>
+            <label>下一步行动<input name="nextAction" /></label>
+            <label>下次跟进日期<input name="nextFollowUp" type="date" /></label>
+            <label>商机金额区间<select name="amountRange"><option value="">暂未评估</option><option>10万元以内</option><option>10万—50万元</option><option>50万—100万元</option><option>100万元以上</option></select></label>
+            <label>关闭原因<input name="closeReason" placeholder="仅在暂缓或关闭时填写" /></label>
+            <div class="dialog-actions"><button class="button secondary" value="cancel">取消</button><button class="button primary" id="saveLead" value="default">保存更新</button></div>
+          </form>
+        </dialog>
+      </section>
+
+      <section id="dashboard" class="view">
+        <div class="section-heading">
+          <div><p class="eyebrow">REVIEW</p><h2>展会线索与转化看板</h2></div>
+          <p>演示数据用于说明管理口径，不能作为本次北京车展的真实转化结果。</p>
+        </div>
+        <div id="metricCards" class="metric-cards"></div>
+        <div class="dashboard-grid">
+          <article class="panel"><h3>转化漏斗</h3><div id="funnel" class="funnel"></div></article>
+          <article class="panel"><h3>产品线关注度</h3><div id="productChart" class="bar-chart"></div></article>
+          <article class="panel insight-panel"><p class="panel-kicker">AI复盘摘要</p><h3>自动归纳客户结构与行动建议</h3><div id="reviewSummary"></div></article>
+        </div>
+      </section>
+    </main>
+
+    <footer><span>北京车展全流程策划与客户线索工作流设计</span><span>交互原型 · 数据仅供演示</span></footer>
+    <script>
+(function(){
+"use strict";
+const STATUS_ORDER = [
+  "待整理",
+  "待分配",
+  "已移交",
+  "已接收",
+  "已联系",
+  "项目机会",
+  "样件或方案",
+  "报价商务",
+  "成交",
+];
+
+const REGION_OWNERS = {
+  华东: "王磊",
+  华南: "刘敏",
+  华北: "赵晨",
+  西部: "孙悦",
+};
+
+const PRODUCT_OWNERS = {
+  内饰纹理: "王磊",
+  外饰纹理: "刘敏",
+  模具工艺: "赵晨",
+  数字化服务: "孙悦",
+};
+
+function clean(value) {
+  return String(value ?? "").trim();
+}
+
+function classifyLead(lead) {
+  const tags = [lead.companyType, lead.productLine, lead.application].map(clean).filter(Boolean);
+  if (lead.needsSample) tags.push("样件需求");
+  if (lead.needsTechnicalSupport) tags.push("技术沟通");
+  if (/下一年度|新车型|项目|量产|定点/.test(clean(lead.notes))) tags.push("明确项目信号");
+
+  const priorityScore =
+    (lead.companyType === "主机厂" ? 2 : 0) +
+    (lead.needsSample ? 1 : 0) +
+    (lead.needsTechnicalSupport ? 1 : 0) +
+    (/新车型|项目|量产|定点/.test(clean(lead.notes)) ? 2 : 0) +
+    (/前期设计|开发验证/.test(clean(lead.projectStage)) ? 1 : 0);
+
+  const priority = priorityScore >= 5 ? "重点" : priorityScore >= 2 ? "跟进" : "一般";
+  const subject = [lead.companyType, lead.department].map(clean).filter(Boolean).join(" · ") || "客户";
+  const interest = [lead.application, lead.productLine].map(clean).filter(Boolean).join(" / ") || "相关产品";
+  const summary = `${subject}，关注${interest}${lead.projectStage ? `，处于${lead.projectStage}阶段` : ""}。${clean(lead.notes)}`;
+  const nextAction = lead.needsSample
+    ? "发送匹配的纹理方案与样件选项，并安排进一步沟通"
+    : lead.needsTechnicalSupport
+      ? "安排销售与技术团队共同确认需求"
+      : "由销售完成首次联系并补充项目背景";
+
+  return { tags: [...new Set(tags)], priority, summary, nextAction };
+}
+
+function assignSalesOwner({ existingOwner, region, productLine }) {
+  return clean(existingOwner) || REGION_OWNERS[region] || PRODUCT_OWNERS[productLine] || "待人工分配";
+}
+
+function reached(status, target) {
+  if (status === "暂缓或关闭") return false;
+  return STATUS_ORDER.indexOf(status) >= STATUS_ORDER.indexOf(target);
+}
+
+function calculateMetrics(leads) {
+  const validLeads = leads.filter((lead) => lead.valid !== false);
+  const countReached = (target) => validLeads.filter((lead) => reached(lead.status, target)).length;
+  const handedOff = countReached("已移交");
+  const accepted = countReached("已接收");
+  const opportunities = countReached("项目机会");
+  const quoted = countReached("报价商务");
+  const won = countReached("成交");
+  const pct = (part, total) => (total ? Math.round((part / total) * 100) : 0);
+
+  return {
+    total: leads.length,
+    valid: validLeads.length,
+    handedOff,
+    accepted,
+    contacted: countReached("已联系"),
+    opportunities,
+    quoted,
+    won,
+    acceptanceRate: pct(accepted, handedOff),
+    opportunityRate: pct(opportunities, validLeads.length),
+    quoteRate: pct(quoted, opportunities),
+    winRate: pct(won, validLeads.length),
+  };
+}
+
+function getAutomationAlerts(leads, now = new Date()) {
+  const alerts = [];
+  for (const lead of leads) {
+    if (lead.status === "已移交" && lead.handedOffAt) {
+      const hours = (now.getTime() - new Date(lead.handedOffAt).getTime()) / 3600000;
+      if (hours >= 72) alerts.push({ id: lead.id, level: "高", message: "线索移交超过72小时仍未确认接收" });
+      else if (hours >= 48) alerts.push({ id: lead.id, level: "中", message: "线索移交超过48小时，已同步市场负责人" });
+      else if (hours >= 24) alerts.push({ id: lead.id, level: "低", message: "线索移交超过24小时，提醒销售确认" });
+    }
+    if (lead.nextFollowUp && !["成交", "暂缓或关闭"].includes(lead.status)) {
+      const due = new Date(`${lead.nextFollowUp}T23:59:59`);
+      if (due < now) alerts.push({ id: lead.id, level: "中", message: "已超过计划跟进日期" });
+    }
+  }
+  return alerts.sort((a, b) => ({ 高: 0, 中: 1, 低: 2 })[a.level] - ({ 高: 0, 中: 1, 低: 2 })[b.level]);
+}
+
+const workflowStatuses = STATUS_ORDER;
+
+
+/* ---------- app ---------- */
+
+const STORAGE_KEY = "auto-show-workflow-demo-v1";
+const nowIso = () => new Date().toISOString();
+const demoLeads = [
+  {id:"L-001",name:"张女士",company:"华东某主机厂",department:"内饰设计部",contact:"demo@example.com",companyType:"主机厂",region:"华东",productLine:"内饰纹理",application:"仪表板",projectStage:"前期设计",needsSample:true,needsTechnicalSupport:false,notes:"下一年度新车型，希望了解自然细腻风格",priority:"重点",tags:["主机厂","内饰纹理","样件需求","明确项目信号"],summary:"主机厂 · 内饰设计部，关注仪表板 / 内饰纹理，处于前期设计阶段。下一年度新车型，希望了解自然细腻风格",owner:"王磊",status:"项目机会",nextAction:"发送纹理方案并安排设计沟通",nextFollowUp:"2026-11-14",handedOffAt:"2026-11-08T09:00:00+08:00",valid:true,amountRange:"50万—100万元"},
+  {id:"L-002",name:"李先生",company:"华南某一级供应商",department:"项目采购",contact:"13800000000",companyType:"一级供应商",region:"华南",productLine:"外饰纹理",application:"格栅",projectStage:"开发验证",needsSample:true,needsTechnicalSupport:true,notes:"需要耐候效果样件进行验证",priority:"跟进",tags:["一级供应商","外饰纹理","样件需求","技术沟通"],summary:"一级供应商 · 项目采购，关注格栅 / 外饰纹理，处于开发验证阶段。需要耐候效果样件进行验证",owner:"刘敏",status:"样件或方案",nextAction:"确认样件规格和寄送时间",nextFollowUp:"2026-11-16",handedOffAt:"2026-11-09T09:00:00+08:00",valid:true,amountRange:"10万—50万元"},
+  {id:"L-003",name:"周女士",company:"华北某汽车集团",department:"创新中心",contact:"demo2@example.com",companyType:"主机厂",region:"华北",productLine:"数字化服务",application:"纹理选型",projectStage:"概念调研",needsSample:false,needsTechnicalSupport:true,notes:"希望了解数字化纹理库和快速选型方式",priority:"跟进",tags:["主机厂","数字化服务","技术沟通"],summary:"主机厂 · 创新中心，关注纹理选型 / 数字化服务，处于概念调研阶段。希望了解数字化纹理库和快速选型方式",owner:"赵晨",status:"已联系",nextAction:"安排平台演示",nextFollowUp:"2026-11-15",handedOffAt:"2026-11-10T09:00:00+08:00",valid:true,amountRange:""},
+  {id:"L-004",name:"陈先生",company:"某设计机构",department:"CMF设计",contact:"demo3@example.com",companyType:"设计机构",region:"华东",productLine:"内饰纹理",application:"门板",projectStage:"暂无明确项目",needsSample:false,needsTechnicalSupport:false,notes:"关注竹木与织物风格",priority:"一般",tags:["设计机构","内饰纹理"],summary:"设计机构 · CMF设计，关注门板 / 内饰纹理，处于暂无明确项目阶段。关注竹木与织物风格",owner:"王磊",status:"已移交",nextAction:"销售确认接收后发送纹理目录",nextFollowUp:"",handedOffAt:"2026-11-07T09:00:00+08:00",valid:true,amountRange:""},
+  {id:"L-005",name:"吴先生",company:"西部某零部件公司",department:"技术部",contact:"demo4@example.com",companyType:"二级供应商",region:"西部",productLine:"模具工艺",application:"门板模具",projectStage:"量产准备",needsSample:false,needsTechnicalSupport:true,notes:"项目进入量产准备，需要确认工艺窗口",priority:"重点",tags:["二级供应商","模具工艺","技术沟通","明确项目信号"],summary:"二级供应商 · 技术部，关注门板模具 / 模具工艺，处于量产准备阶段。项目进入量产准备，需要确认工艺窗口",owner:"孙悦",status:"报价商务",nextAction:"销售更新商务进度",nextFollowUp:"2026-11-13",handedOffAt:"2026-11-06T09:00:00+08:00",valid:true,amountRange:"100万元以上"},
+  {id:"L-006",name:"赵女士",company:"华东某新能源车企",department:"产品开发",contact:"demo5@example.com",companyType:"主机厂",region:"华东",productLine:"外饰纹理",application:"立柱饰板",projectStage:"开发验证",needsSample:true,needsTechnicalSupport:true,notes:"已完成前期沟通，进入供应商定点评估",priority:"重点",tags:["主机厂","外饰纹理","样件需求","明确项目信号"],summary:"主机厂 · 产品开发，关注立柱饰板 / 外饰纹理，处于开发验证阶段。已完成前期沟通，进入供应商定点评估",owner:"王磊",status:"成交",nextAction:"转入项目交付",nextFollowUp:"",handedOffAt:"2026-11-05T09:00:00+08:00",valid:true,amountRange:"100万元以上"}
+];
+
+let leads = loadLeads();
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+function loadLeads(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)) || structuredClone(demoLeads)}catch{return structuredClone(demoLeads)} }
+function saveLeads(){localStorage.setItem(STORAGE_KEY,JSON.stringify(leads))}
+function escapeHtml(value){return String(value??"").replace(/[&<>'"]/g,(c)=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"})[c])}
+
+const flow = [
+  ["客户登记","市场","role-market"],["AI需求分类","系统","role-system"],["市场确认","市场","role-market"],["销售分配","系统","role-system"],["确认接收","销售","role-sales"],["需求沟通","销售","role-sales"],["样件方案","销售","role-sales"],["报价商务","销售","role-sales"],["复盘统计","系统","role-system"]
+];
+$("#flowSteps").innerHTML=flow.map(([name,role,cls])=>`<div class="flow-step ${cls}"><b>${name}</b><span>${role}负责</span></div>`).join("");
+
+function switchView(view){$$(`.tab`).forEach(x=>x.classList.toggle("active",x.dataset.view===view));$$(`.view`).forEach(x=>x.classList.toggle("active-view",x.id===view));if(view==="leads")renderLeads();if(view==="dashboard")renderDashboard()}
+$$(`.tab`).forEach(tab=>tab.addEventListener("click",()=>switchView(tab.dataset.view)));
+
+workflowStatuses.concat(["暂缓或关闭"]).forEach(status=>{$("#statusFilter").insertAdjacentHTML("beforeend",`<option>${status}</option>`);$("#dialogStatus").insertAdjacentHTML("beforeend",`<option>${status}</option>`)});
+
+$("#fillExample").addEventListener("click",()=>{const f=$("#leadForm");f.name.value="林女士";f.company.value="某新能源汽车公司";f.department.value="内饰设计部";f.contact.value="lin@example.com";f.companyType.value="主机厂";f.region.value="华东";f.productLine.value="内饰纹理";f.application.value="仪表板与门板";f.projectStage.value="前期设计";f.notes.value="下一年度新车型项目，希望了解自然、细腻风格纹理，需要提供样件";f.needsSample.checked=true;f.needsTechnicalSupport.checked=true});
+
+$("#leadForm").addEventListener("submit",(event)=>{event.preventDefault();const data=Object.fromEntries(new FormData(event.currentTarget));data.needsSample=event.currentTarget.needsSample.checked;data.needsTechnicalSupport=event.currentTarget.needsTechnicalSupport.checked;const ai=classifyLead(data);const owner=assignSalesOwner(data);const lead={...data,...ai,id:`L-${String(leads.length+1).padStart(3,"0")}`,owner,status:"已移交",valid:true,handedOffAt:nowIso(),nextFollowUp:"",amountRange:""};leads.unshift(lead);saveLeads();$("#aiResult").hidden=false;$("#aiResult").innerHTML=`<h3>AI分类结果</h3><div class="ai-grid"><div><b>客户等级</b><p>${ai.priority}</p></div><div><b>建议负责人</b><p>${owner}</p></div><div><b>自动标签</b><p>${ai.tags.map(escapeHtml).join(" · ")}</p></div><div><b>建议动作</b><p>${escapeHtml(ai.nextAction)}</p></div></div><b>需求摘要</b><p>${escapeHtml(ai.summary)}</p><button class="button primary" id="goToLead">前往线索工作台</button>`;$("#goToLead").addEventListener("click",()=>switchView("leads"));event.currentTarget.reset();});
+
+function badgeClass(priority){return priority==="重点"?"high":priority==="跟进"?"follow":"normal"}
+function renderLeads(){const filter=$("#statusFilter").value;const query=$("#searchInput").value.trim().toLowerCase();const filtered=leads.filter(l=>(!filter||l.status===filter)&&(!query||[l.name,l.company,l.productLine,l.application].join(" ").toLowerCase().includes(query)));$("#leadRows").innerHTML=filtered.map(l=>`<tr data-id="${l.id}"><td><b>${escapeHtml(l.id)}</b><span class="subtle">${escapeHtml(l.name)}</span></td><td><b>${escapeHtml(l.company)}</b><span class="subtle">${escapeHtml(l.productLine)} · ${escapeHtml(l.application)}</span></td><td><span class="badge ${badgeClass(l.priority)}">${escapeHtml(l.priority)}</span></td><td>${escapeHtml(l.owner)}</td><td>${escapeHtml(l.status)}</td><td>${escapeHtml(l.nextAction||"待补充")}</td></tr>`).join("")||`<tr><td colspan="6">没有匹配的线索</td></tr>`;$$(`#leadRows tr[data-id]`).forEach(row=>row.addEventListener("click",()=>openLead(row.dataset.id)));const alerts=getAutomationAlerts(leads);$("#alertList").innerHTML=alerts.slice(0,4).map(a=>`<div class="alert"><b>${a.level}优先级</b><span>${a.id} · ${a.message}</span></div>`).join("");}
+$("#statusFilter").addEventListener("change",renderLeads);$("#searchInput").addEventListener("input",renderLeads);
+
+function openLead(id){const l=leads.find(x=>x.id===id);const f=$("#leadUpdateForm");f.id.value=l.id;f.status.value=l.status;f.nextAction.value=l.nextAction||"";f.nextFollowUp.value=l.nextFollowUp||"";f.amountRange.value=l.amountRange||"";f.closeReason.value=l.closeReason||"";$("#dialogTitle").textContent=`${l.company} · ${l.name}`;$("#dialogSummary").innerHTML=`<b>AI摘要</b><p>${escapeHtml(l.summary)}</p><div class="tags">${l.tags.map(t=>`<span>${escapeHtml(t)}</span>`).join("")}</div>`;$("#leadDialog").showModal()}
+$("#saveLead").addEventListener("click",(event)=>{event.preventDefault();const f=$("#leadUpdateForm");const data=Object.fromEntries(new FormData(f));const idx=leads.findIndex(x=>x.id===data.id);if(idx>=0){leads[idx]={...leads[idx],...data};saveLeads();$("#leadDialog").close();renderLeads()}});
+
+function renderDashboard(){const m=calculateMetrics(leads);const cards=[["登记客户",m.total],["有效线索",m.valid],["销售接收率",`${m.acceptanceRate}%`],["项目机会率",`${m.opportunityRate}%`],["报价转化率",`${m.quoteRate}%`],["成交转化率",`${m.winRate}%`],["进入报价",m.quoted],["成交",m.won]];$("#metricCards").innerHTML=cards.map(([label,val])=>`<div class="metric-card"><strong>${val}</strong><span>${label}</span></div>`).join("");const funnel=[["有效",m.valid],["已移交",m.handedOff],["已接收",m.accepted],["已联系",m.contacted],["项目机会",m.opportunities],["报价商务",m.quoted],["成交",m.won]];const max=Math.max(1,m.valid);$("#funnel").innerHTML=funnel.map(([label,val])=>`<div class="funnel-row"><span>${label}</span><div class="funnel-bar" style="width:${Math.max(6,val/max*100)}%"></div><b>${val}</b></div>`).join("");const counts={};leads.forEach(l=>counts[l.productLine]=(counts[l.productLine]||0)+1);const pmax=Math.max(...Object.values(counts),1);$("#productChart").innerHTML=Object.entries(counts).map(([label,val])=>`<div class="bar-row"><span>${label}</span><div class="bar-track"><div class="bar-fill" style="width:${val/pmax*100}%"></div></div><b>${val}</b></div>`).join("");const topProduct=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0]?.[0]||"暂无";const keyLeads=leads.filter(l=>l.priority==="重点").length;$("#reviewSummary").innerHTML=`<p>本次演示共登记 <b>${m.total}</b> 条线索，其中 <b>${keyLeads}</b> 条被识别为重点线索。客户关注度最高的产品线为 <b>${topProduct}</b>。</p><p>当前已有 <b>${m.opportunities}</b> 条进入项目机会阶段，<b>${m.quoted}</b> 条进入报价商务阶段。建议优先检查超时未接收线索，并对需要样件或技术沟通的客户安排明确负责人和下一步日期。</p>`;}
+
+$("#resetDemo").addEventListener("click",()=>{if(confirm("恢复示例数据将清除当前演示记录，是否继续？")){leads=structuredClone(demoLeads);saveLeads();renderLeads();renderDashboard();switchView("overview")}});
+renderLeads();
+
+})();
+</script>
+  
+<style>
+  .wf-back{position:fixed;left:18px;bottom:18px;z-index:99;display:inline-flex;align-items:center;gap:8px;
+    padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);
+    border:1px solid rgba(139,124,246,.35);color:#5b4bc4;font-size:13px;font-weight:700;
+    text-decoration:none;box-shadow:0 6px 20px rgba(91,75,196,.18);transition:transform .2s,box-shadow .2s}
+  .wf-back:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(91,75,196,.28)}
+  @media(max-width:640px){.wf-back{left:12px;bottom:12px;padding:9px 14px;font-size:12px}}
+</style>
+<a class="wf-back" href="./index.html">← 返回作品集</a>
+</body>
+</html>
